@@ -36,4 +36,11 @@ class Controller:
        self._view.update_page()
 
     def handle_simula(self, e):
-       pass
+        try: int(self._view.txt_k.value)
+        except: self._view.create_alert("inserire un numero intero")
+
+        numero_cibi, tempo = self._model.simula(self._view.ddCibo.value, int(self._view.txt_k.value))
+        self._view.txt_result.controls.append(ft.Text(f"Con {int(self._view.txt_k.value)} stazioni si "
+                                                      f"preparano {numero_cibi} cibi in {tempo} minuti,"
+                                                      f"a partire da {self._view.ddCibo.value}"))
+        self._view.update_page()
